@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Image {
     private JFrame frame;
@@ -20,8 +21,13 @@ public class Image {
     }
 
     public void placeComponents(JPanel panel){
+
         JButton fin = new JButton("fin de tour");
         fin.setBounds(0,0,20,20);
         panel.add(fin);
+    }
+
+    public void ajouteelement(JComponent element){
+        panel.add(element);
     }
 }
