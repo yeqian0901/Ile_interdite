@@ -27,6 +27,10 @@ public class Image {
         panel.add(fin);
     }
 
+    private void drawgrille(Graphics g){
+        g.drawLine(1,1,1,1);
+    }
+
     public void ajouteelement(JComponent element){
         panel.add(element);
     }
