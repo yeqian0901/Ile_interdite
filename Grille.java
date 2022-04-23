@@ -1,7 +1,5 @@
-package IG;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import java.awt.GridLayout;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Classe pour un ensemble d'éléments graphiques disposés en grille.
@@ -14,8 +12,8 @@ public class Grille extends JPanel {
      * @param hauteur Nombre de lignes de la grille.
      * @param largeur Nombre de colonnes de la grille.
      */
-    public Grille (int hauteur, int largeur) {
-	setLayout(new GridLayout(hauteur, largeur, 5, 5));
+    public Grille(int hauteur, int largeur) {
+	 setLayout(new GridLayout(hauteur, largeur, 5, 5));
     }
 
     /**

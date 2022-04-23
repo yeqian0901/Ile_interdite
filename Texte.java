@@ -1,7 +1,4 @@
-package IG;
-
-import javax.swing.JLabel;
-import javax.swing.JComponent;
+import javax.swing.*;
 
 
 /**

@@ -1,23 +1,16 @@
-import java.util.Set;
-import java.util.HashSet;
-
-public class Case extends IG.ZoneCliquable{
-    private String nom;
+public class Case extends ZoneCliquable{
     private int x,y;
     private int flood;//0 normal, et apres niveau 1 inonder, et enfin 2 submerger
     private boolean helicoptere;
     private int element;//0 est rien, 1 est eau, 2 est terre, 3 est feu, 4 est air
-    private Set<Arete> aretes;
 
-    public Case(String nom,int x, int y, int element){
-        super(nom,100,100);
-        this.nom = nom;
+    public Case(boolean heli, int x, int y, int element){
+        super("",100,100);
         this.x=x;
         this.y=y;
         this.element = element;
         this.flood = 0;
-        this.helicoptere = false;
-        this.aretes = new HashSet<Arete>();
+        this.helicoptere = heli;
     }
 
     public void addHelicop(){
@@ -36,20 +29,29 @@ public class Case extends IG.ZoneCliquable{
        }
     }
 
-    public boolean arete(){
-        if(aretes.size()>4){
-            return false;
+    public int getElement() {
+        return element;
+    }
+
+    public boolean isHelicoptere() {
+        return helicoptere;
+    }
+
+    public void setElement(int element) {
+        if(element < 0){
+            return;
         }
-        return true;
+        this.element = element;
     }
 
-    public void ajouteArete(Arete a){
-            aretes.add(a);
+    @Override
+    public int getX() {
+        return x;
     }
 
-    public void setCase(int x,int y){
-        this.x = x;
-        this.y = y;
+    @Override
+    public int getY() {
+        return y;
     }
 
     public void clicGauche(){}
