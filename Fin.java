@@ -1,18 +1,16 @@
+import javax.swing.*;
 import java.awt.*;
 
 public class Fin extends ZoneCliquable{
-    private Graphe graphe;
-
-    public Fin(Graphe g){
-        super("fin de tour", 80,30);
-        setForeground(Color.YELLOW);
-        this.graphe = g;
+    private Game game;
+    public Fin(Game game){
+        super("fin de tour",80,30);
+        this.game = game;
     }
     @Override
     public void clicGauche() {
-        graphe.floodAdd();
+        game.update();
     }
-
     @Override
     public void clicDroit() {
 
