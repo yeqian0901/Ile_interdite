@@ -91,4 +91,30 @@ public class Graphe{
         }
         cases[x][y].removeJoueur();
     }
+
+    public Case getCase(int x, int y){
+        return cases[x][y];
+    }
+
+    public Joueur[] creeJoueurs(int n){
+        Joueur[] j= new Joueur[n];
+        int[] deja = new int[20];
+        int compte=0;
+        int x,y;
+        while (compte<n) {
+            do {
+                x = random.nextInt(tx);
+                y = random.nextInt(ty);
+            } while (contains(x, y, deja));
+
+            Case c = getCase(x,y);
+            j[compte] = new Joueur("nom"+compte, c);
+            c.addJoueur(j[compte]);
+
+            deja[compte*2] = x;
+            deja[compte*2 + 1] = y;
+            compte++;
+        }
+        return j;
+    }
 }

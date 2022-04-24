@@ -5,10 +5,11 @@ import java.awt.event.ActionListener;
 
 public class Game extends JPanel {
     private Graphe graphe;
-    private Joueur joueur;
+    private Joueur[] joueurs;
     private JFrame frame;
     private JPanel panel1;
     private JPanel panel2;
+    private JPanel panel3;
 
     private Color[] NORMAL = {Color.white, Color.gray, Color.black};
     private Color[] HELI = {new Color(255, 0, 0), new Color(100, 0, 0), Color.black};
@@ -17,14 +18,15 @@ public class Game extends JPanel {
     private Color[] FEU = {new Color(255, 100, 0), new Color(100, 50, 0), Color.black};
     private Color[] AIR = {new Color(0, 200, 200), new Color(0, 60, 60), Color.black};
     private Color[] JOUEUR = {Color.black, Color.CYAN,Color.GREEN,Color.RED};
+    private ImageIcon[] NOR = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/normal.jpg"),new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/inonde.jpg"),new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/submerge.jpg") };
 
-    public Game(Graphe g){
+    public Game(Graphe g, Joueur[] joueurs){
         this.graphe = g;
-        this.joueur = new Joueur(this, "nom", graphe.getCases()[0][0]);
-        graphe.getCases()[0][0].addJoueur(this.joueur);
+        this.joueurs = joueurs;
         this.frame = new JFrame("Ile d'interdite");
         this.panel1 = new JPanel();
         this.panel2 = new JPanel();
+        this.panel3 = new JPanel();
     }
 
     public void start(){
@@ -32,7 +34,7 @@ public class Game extends JPanel {
         draw();
         frame.add(panel1);
         panel2.setLayout(new GridLayout(2,2));
-        direction(joueur);
+        direction(joueurs[0]);
         frame.add(panel2, BorderLayout.EAST);
         JButton fin = new JButton("fin de tour");
         fin.addActionListener(new ActionListener() {
@@ -61,70 +63,92 @@ public class Game extends JPanel {
         for(int i=0;i<graphe.getTx();i++) {
             for (int j = 0; j < graphe.getTy(); j++) {
                 if(cases[i][j].isHelicoptere()){
-                    JButton c;
+                    ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/heliport.jpg");
+                    image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                     if(cases[i][j].getJoueur() != null){
-                        c = new JButton("HELICOPTER   " + cases[i][j].getJoueur().getNom());
+                        JButton c = new JButton(cases[i][j].getJoueur().getNom());
+                        c.setForeground(JOUEUR[0]);
+                        JLabel img = new JLabel(image, JLabel.LEFT);
+                        img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                        img.add(c);
+                        panel1.add(img);
                     }else {
-                        c = new JButton("HELICOPTER");
+                        JLabel img = new JLabel(new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/heliport.jpg"), JLabel.LEFT);
+                        panel1.add(img);
                     }
-                    c.setForeground(HELI[cases[i][j].getFlood()]);
-                    c.setPreferredSize(new Dimension(100, 100));
-                    panel1.add(c);
                 }else{
                     if(cases[i][j].getElement() == 0) {
-                        JButton c;
                         if(cases[i][j].getJoueur() != null){
-                            c = new JButton(cases[i][j].getJoueur().getNom());
+                            JButton c = new JButton(cases[i][j].getJoueur().getNom());
                             c.setForeground(JOUEUR[0]);
+                            NOR[cases[i][j].getFlood()].setImage(NOR[cases[i][j].getFlood()].getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+                            JLabel img = new JLabel(NOR[cases[i][j].getFlood()], JLabel.LEFT);
+                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                            img.add(c);
+                            panel1.add(img);
                         }else {
-                            c = new JButton("NORMAL");
-                            c.setForeground(NORMAL[cases[i][j].getFlood()]);
+                            JLabel img = new JLabel(NOR[cases[i][j].getFlood()], JLabel.LEFT);
+                            panel1.add(img);
                         }
-                        c.setPreferredSize(new Dimension(100, 100));
-                        panel1.add(c);
                         //c.setBackground(Color.YELLOW);
                         //c.setOpaque(true);
                         //c.setBorderPainted(false);
                     } else if (cases[i][j].getElement() == 1) {
-                        JButton c;
+                        ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/eau.jpg");
+                        image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                         if(cases[i][j].getJoueur() != null){
-                            c = new JButton("EAU   " + cases[i][j].getJoueur().getNom());
+                            JButton c = new JButton(cases[i][j].getJoueur().getNom());
+                            c.setForeground(JOUEUR[0]);
+                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                            img.add(c);
+                            panel1.add(img);
                         }else {
-                            c = new JButton("EAU");
+                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            panel1.add(img);
                         }
-                        c.setForeground(EAU[cases[i][j].getFlood()]);
-                        c.setPreferredSize(new Dimension(100, 100));
-                        panel1.add(c);
                     } else if (cases[i][j].getElement() == 2) {
-                        JButton c;
+                        ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/terre.jpg");
+                        image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                         if(cases[i][j].getJoueur() != null){
-                            c = new JButton("TERRE   " + cases[i][j].getJoueur().getNom());
+                            JButton c = new JButton(cases[i][j].getJoueur().getNom());
+                            c.setForeground(JOUEUR[0]);
+                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                            img.add(c);
+                            panel1.add(img);
                         }else {
-                            c = new JButton("TERRE");
+                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            panel1.add(img);
                         }
-                        c.setForeground(TERRE[cases[i][j].getFlood()]);
-                        c.setPreferredSize(new Dimension(100, 100));
-                        panel1.add(c);
                     } else if (cases[i][j].getElement() == 3) {
-                        JButton c;
+                        ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/feu.jpg");
+                        image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                         if(cases[i][j].getJoueur() != null){
-                            c = new JButton("FEU   " + cases[i][j].getJoueur().getNom());
+                            JButton c = new JButton(cases[i][j].getJoueur().getNom());
+                            c.setForeground(JOUEUR[0]);
+                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                            img.add(c);
+                            panel1.add(img);
                         }else {
-                            c = new JButton("FEU");
+                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            panel1.add(img);
                         }
-                        c.setForeground(FEU[cases[i][j].getFlood()]);
-                        c.setPreferredSize(new Dimension(100, 100));
-                        panel1.add(c);
                     } else if (cases[i][j].getElement() == 4) {
-                        JButton c;
+                        ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/air.jpg");
+                        image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                         if(cases[i][j].getJoueur() != null){
-                            c = new JButton("AIR   " + cases[i][j].getJoueur().getNom());
+                            JButton c = new JButton(cases[i][j].getJoueur().getNom());
+                            c.setForeground(JOUEUR[0]);
+                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                            img.add(c);
+                            panel1.add(img);
                         }else {
-                            c = new JButton("AIR");
+                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            panel1.add(img);
                         }
-                        c.setForeground(AIR[cases[i][j].getFlood()]);
-                        c.setPreferredSize(new Dimension(100, 100));
-                        panel1.add(c);
                     }
                 }
             }
@@ -204,4 +228,5 @@ public class Game extends JPanel {
         panel1.updateUI();
         frame.add(panel1);
     }
+
 }
