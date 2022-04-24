@@ -4,13 +4,14 @@ public class Graphe{
     private int tx,ty;
     private Case[][] cases;// Tableau contenant les cases
     private Random random = new Random();
-
+    private Case[] artefact;
 
     // Constructeur
     public Graphe(int tx,int ty) {
         this.tx = tx;
         this.ty = ty;
         cases = new Case[tx][ty];
+        this.artefact = new Case[10];
             for(int i=0;i<tx;i++){
                 for(int j=0;j<ty;j++){
                     Case c = new Case(this,false,i,j,0);
@@ -32,8 +33,10 @@ public class Graphe{
 
             if(compte == 0){
                 cases[x][y].addHelicop();
+                artefact[compte] = cases[x][y];
             }else{
                 cases[x][y].setElement(compte % 5);
+                artefact[compte] = cases[x][y];
             }
 
             deja[compte*2] = x;
@@ -41,10 +44,6 @@ public class Graphe{
             compte++;
         }
         //return deja.iterator().next();  // return le premier element de deja
-    }
-
-    public void initJoueur(){
-
     }
 
     public int getTx() {
@@ -120,7 +119,7 @@ public class Graphe{
             } while (contains(x, y, deja) || cases[x][y].getElement() != 0);
 
             Case c = getCase(x,y);
-            j[compte] = new Joueur(this,"nom"+compte, c);
+            j[compte] = new Joueur("nom"+compte, c);
             c.addJoueur(j[compte]);
 
             deja[compte*2] = x;
@@ -132,5 +131,9 @@ public class Graphe{
 
     public void reduceFlood(int x,int y){
         cases[x][y].reduceflood();
+    }
+
+    public Case[] getArtefact(){
+        return this.artefact;
     }
 }

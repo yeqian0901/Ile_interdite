@@ -1,13 +1,11 @@
 import java.util.ArrayList;
 
 public class Joueur {
-    private Graphe graphe;
     private String nom;
     private Case caseJ;
     private int[] cles;//0 est eau, 1 est terre, 2 est feu, 3 est air
 
-    public Joueur(Graphe graphe, String nom, Case c){
-        this.graphe = graphe;
+    public Joueur(String nom, Case c){
         this.nom = nom;
         this.caseJ = c;
         this.cles = new int[]{0,0,0,0};

@@ -7,7 +7,9 @@ Yeqian HE et Jincheng YE
 
 Objectif : creer le jeu d'Ile d'interdite
 
-ConditionGagne : tous les joueurs partissent de helicopter avec posseder tous le cles.
+ConditionGagne : tous les joueurs partissent de helicopter avec posseder tous le cles apres presser le button "fin de tour" pour afficher le graphe gagné.
+
+ConditionFail : le heliport est submergé avant de gagner ou les cases specials d'un element sont tous submergé mais il n'y a pas assis des cles de cet element pour le somme de tous les joueur.
 
 Class:
 

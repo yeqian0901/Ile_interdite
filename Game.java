@@ -442,6 +442,20 @@ public class Game extends JPanel {
         if(heli.getFlood() >= 2){
             return true;
         }
+        Case[] a = graphe.getArtefact();
+        for(int i=1;i<5;i++){
+            if(a[i].getFlood() >= 2 && a[i+5].getFlood() >= 2){
+                int s=0;
+                for(int j=0;j<joueurs.length;j++){
+                    if(joueurs[j].nbCle(i-1) <= 0){
+                        s++;
+                    }
+                }
+                if(s<joueurs.length){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
