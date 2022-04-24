@@ -147,23 +147,23 @@ public class Game extends JPanel {
     public void cle(){
         label1 = new JLabel(joueurs[0].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[0].nbCle(0) + "; " + ELEMENT[1] + " -> "+ joueurs[0].nbCle(1) + "; " + ELEMENT[2] + " -> "+ joueurs[0].nbCle(2) + "; " + ELEMENT[3] + " -> "+ joueurs[0].nbCle(3));
         label1.setForeground(JOUEUR[0]);
-        if(joueurs[1] != null) {
+        if(joueurs.length>1) {
             label2 = new JLabel(joueurs[1].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[1].nbCle(0) + "; " + ELEMENT[1] + " -> " + joueurs[1].nbCle(1) + "; " + ELEMENT[2] + " -> " + joueurs[1].nbCle(2) + "; " + ELEMENT[3] + " -> " + joueurs[1].nbCle(3));
             label2.setForeground(JOUEUR[1]);
         }
-        if(joueurs[2] != null) {
+        if(joueurs.length>2) {
             label3 = new JLabel(joueurs[2].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[2].nbCle(0) + "; " + ELEMENT[1] + " -> " + joueurs[2].nbCle(1) + "; " + ELEMENT[2] + " -> " + joueurs[2].nbCle(2) + "; " + ELEMENT[3] + " -> " + joueurs[2].nbCle(3));
             label3.setForeground(JOUEUR[2]);
         }
-        if(joueurs[3] != null) {
+        if(joueurs.length>3) {
             label4 = new JLabel(joueurs[3].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[3].nbCle(0) + "; " + ELEMENT[1] + " -> " + joueurs[3].nbCle(1) + "; " + ELEMENT[2] + " -> " + joueurs[3].nbCle(2) + "; " + ELEMENT[3] + " -> " + joueurs[3].nbCle(3));
             label4.setForeground(JOUEUR[3]);
         }
-        if(joueurs[4] != null) {
+        if(joueurs.length>4) {
             label5 = new JLabel(joueurs[4].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[4].nbCle(0) + "; " + ELEMENT[1] + " -> " + joueurs[4].nbCle(1) + "; " + ELEMENT[2] + " -> " + joueurs[4].nbCle(2) + "; " + ELEMENT[3] + " -> " + joueurs[4].nbCle(3));
             label5.setForeground(JOUEUR[4]);
         }
-        if(joueurs[5] != null) {
+        if(joueurs.length>5) {
             label6 = new JLabel(joueurs[5].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[5].nbCle(0) + "; " + ELEMENT[1] + " -> " + joueurs[5].nbCle(1) + "; " + ELEMENT[2] + " -> " + joueurs[5].nbCle(2) + "; " + ELEMENT[3] + " -> " + joueurs[5].nbCle(3));
             label6.setForeground(JOUEUR[5]);
         }
