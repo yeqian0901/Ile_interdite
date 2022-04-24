@@ -11,7 +11,15 @@ public class Game extends JPanel {
     private JPanel panel2;
     private JPanel panel3;
     private JPanel panel4;
+    private JLabel label;
+    private JLabel label1;
+    private JLabel label2;
+    private JLabel label3;
+    private JLabel label4;
+    private JPanel panel5;
     private int n=0;
+    private Case heli;
+    private int click=0;
 
     private Color[] JOUEUR = {Color.black, Color.CYAN,Color.GREEN,Color.RED};
     private ImageIcon[] NOR = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/normal.jpg"),new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/inonde.jpg"),new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/submerge.jpg") };
@@ -40,6 +48,15 @@ public class Game extends JPanel {
         this.panel2 = new JPanel();
         this.panel3 = new JPanel();
         this.panel4 = new JPanel();
+        this.label = new JLabel();
+        this.panel5 = new JPanel();
+        for(int i=0;i<graphe.getTx();i++){
+            for (int j=0;j<graphe.getTy();j++){
+                if(graphe.getCases()[i][j].isHelicoptere()){
+                    this.heli = graphe.getCase(i,j);
+                }
+            }
+        }
     }
 
     public void setImage(){ // redefinir la taille de tous les images
@@ -56,16 +73,16 @@ public class Game extends JPanel {
     public void start(){
         setImage();
         panel1.setLayout(new GridLayout(graphe.getTx(),graphe.getTy()));
-        draw(joueurs[n]);
+        draw();
         frame.add(panel1);
-        panel2.setLayout(new GridLayout(2,2));
+        panel2.setLayout(new GridLayout(3,2));
         direction(joueurs[n]);
         frame.add(panel2, BorderLayout.EAST);
         JButton fin = new JButton("fin de tour");
         fin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                update(joueurs[n]);
+                    update();
             }
         });
         JButton change = new JButton("change joueur");
@@ -78,6 +95,7 @@ public class Game extends JPanel {
                 }
                 move(joueurs[n]);
                 updateJ();
+                click = 0;
             }
         });
         panel3.add(fin);
@@ -92,12 +110,12 @@ public class Game extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void update(Joueur joueur){
-        panel1.removeAll();
-        graphe.floodAdd();
-        draw(joueur);
-        panel1.updateUI();
-        frame.add(panel1);
+    public void update(){
+            panel1.removeAll();
+            graphe.floodAdd();
+            draw();
+            panel1.updateUI();
+            frame.add(panel1);
     }
 
     public void updateJ(){
@@ -107,7 +125,7 @@ public class Game extends JPanel {
         frame.add(panel2, BorderLayout.EAST);
     }
 
-    public void updatecle(Joueur joueur){
+    public void updateCle(Joueur joueur){
         panel4.removeAll();
         move(joueur);
         getCle(joueur);
@@ -117,19 +135,37 @@ public class Game extends JPanel {
     }
 
     public void cle(){
-        JLabel[] labels = new JLabel[joueurs.length];
-        for(int i=0;i< joueurs.length;i++){
-            for(int j=0;j<4;j++) {
-                labels[i] = new JLabel(joueurs[i].getNom() + " : " );
-                if(joueurs[i].haveCle(j)){
-                    labels[i].setText(labels[i].getText() + ELEMENT[j] + joueurs[i].nbCle(j));
-                    panel4.add(labels[i]);
-                }
-            }
-        }
+        label1 = new JLabel(joueurs[0].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[0].nbCle(0) + "; " + ELEMENT[1] + " -> "+ joueurs[0].nbCle(1) + "; " + ELEMENT[2] + " -> "+ joueurs[0].nbCle(2) + "; " + ELEMENT[3] + " -> "+ joueurs[0].nbCle(3));
+        label1.setForeground(JOUEUR[0]);
+        label2 = new JLabel(joueurs[1].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[1].nbCle(0) + "; " + ELEMENT[1] + " -> "+ joueurs[1].nbCle(1) + "; " + ELEMENT[2] + " -> "+ joueurs[1].nbCle(2) + "; " + ELEMENT[3] + " -> "+ joueurs[1].nbCle(3));
+        label2.setForeground(JOUEUR[1]);
+        label3 = new JLabel(joueurs[2].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[2].nbCle(0) + "; " + ELEMENT[1] + " -> "+ joueurs[2].nbCle(1) + "; " + ELEMENT[2] + " -> "+ joueurs[2].nbCle(2) + "; " + ELEMENT[3] + " -> "+ joueurs[2].nbCle(3));
+        label3.setForeground(JOUEUR[2]);
+        label4 = new JLabel(joueurs[3].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[3].nbCle(0) + "; " + ELEMENT[1] + " -> "+ joueurs[3].nbCle(1) + "; " + ELEMENT[2] + " -> "+ joueurs[3].nbCle(2) + "; " + ELEMENT[3] + " -> "+ joueurs[3].nbCle(3));
+        label4.setForeground(JOUEUR[3]);
+        panel4.add(label1);
+        panel4.add(label2);
+        panel4.add(label3);
+        panel4.add(label4);
     }
 
-    public void draw(Joueur joueur){
+    public void draw(){
+        if(isFail()){
+            panel1.setLayout(new GridLayout(1,1));
+            ImageIcon fini = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/defaite.jpg");
+            fini.setImage(fini.getImage().getScaledInstance(500,500, Image.SCALE_DEFAULT));
+            JLabel label = new JLabel(fini, JLabel.CENTER);
+            panel1.add(label);
+            return;
+        }
+        if(isWinning()){
+            panel1.setLayout(new GridLayout(1,1));
+            ImageIcon fini = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/victory.png");
+            fini.setImage(fini.getImage().getScaledInstance(500,500, Image.SCALE_DEFAULT));
+            JLabel label = new JLabel(fini, JLabel.CENTER);
+            panel1.add(label);
+            return;
+        }
         Case[][] cases = graphe.getCases();
         for(int i=0;i<graphe.getTx();i++) {
             for (int j = 0; j < graphe.getTy(); j++) {
@@ -259,6 +295,7 @@ public class Game extends JPanel {
     }
 
     public void direction(Joueur j){
+        label = new JLabel("move step : "+ click + "/3");
         JButton up = new JButton("up");
         up.setForeground(Color.PINK);
         up.addActionListener(new ActionListener() {
@@ -266,11 +303,13 @@ public class Game extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int x = j.getCaseJ().getX();
                 int y = j.getCaseJ().getY();
-                if(x-1 >= 0 && !graphe.existJ(x-1,y)) {
+                if(x-1 >= 0 && !graphe.existJ(x-1,y) && graphe.getCases()[x-1][y].getFlood() < 2 && click <= 2) {
                     graphe.ajouteJ(x-1, y, j);
                     graphe.removeJ(x,y);
                     j.setCaseJ(x-1, y);
-                    updatecle(j);
+                    updateCle(j);
+                    click++;
+                    label.setText("move step : "+ click + "/3");
                 }
             }
         });
@@ -282,11 +321,13 @@ public class Game extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int x = j.getCaseJ().getX();
                 int y = j.getCaseJ().getY();
-                if(y+1 < graphe.getTy() && !graphe.existJ(x, y+1)) {
+                if(y+1 < graphe.getTy() && !graphe.existJ(x, y+1) && graphe.getCases()[x][y+1].getFlood() < 2 && click <= 2) {
                     graphe.ajouteJ(x, y+1, j);
                     graphe.removeJ(x,y);
                     j.setCaseJ(x, y+1);
-                    updatecle(j);
+                    updateCle(j);
+                    click++;
+                    label.setText("move step : "+ click + "/3");
                 }
             }
         });
@@ -298,11 +339,13 @@ public class Game extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int x = j.getCaseJ().getX();
                 int y = j.getCaseJ().getY();
-                if(y-1 >= 0 && !graphe.existJ(x, y-1)) {
+                if(y-1 >= 0 && !graphe.existJ(x, y-1) && graphe.getCases()[x][y-1].getFlood() < 2 && click <= 2) {
                     graphe.ajouteJ(x, y-1, j);
                     graphe.removeJ(x,y);
                     j.setCaseJ(x, y-1);
-                    updatecle(j);
+                    updateCle(j);
+                    click++;
+                    label.setText("move step : "+ click + "/3");
                 }
             }
         });
@@ -314,22 +357,41 @@ public class Game extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 int x = j.getCaseJ().getX();
                 int y = j.getCaseJ().getY();
-                if(x+1 < graphe.getTx() && !graphe.existJ(x+1,y)) {
+                if(x+1 < graphe.getTx() && !graphe.existJ(x+1,y) && graphe.getCases()[x+1][y].getFlood() < 2 && click <= 2) {
                     graphe.ajouteJ(x+1, y, j);
                     graphe.removeJ(x,y);
                     j.setCaseJ(x+1, y);
-                    updatecle(j);
+                    updateCle(j);
+                    click++;
+                    label.setText("move step : "+ click + "/3");
                 }
             }
         });
         panel2.add(down);
+        panel2.add(label);
     }
 
     public void move(Joueur joueur){
         panel1.removeAll();
-        draw(joueur);
+        draw();
         panel1.updateUI();
         frame.add(panel1);
+    }
+
+    public boolean isWinning(){
+        for(int i=0;i< joueurs.length;i++){
+            if(joueurs[i].getCaseJ() == this.heli){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isFail(){
+        if(heli.getFlood() >= 2){
+            return true;
+        }
+        return false;
     }
 
 }

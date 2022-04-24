@@ -2,11 +2,13 @@ public class Joueur {
     private String nom;
     private Case caseJ;
     private int[] cles;//0 est eau, 1 est terre, 2 est feu, 3 est air
+    private int step;
 
     public Joueur(String nom, Case c){
         this.nom = nom;
         this.caseJ = c;
         this.cles = new int[]{0,0,0,0};
+        this.step = 0;
     }
 
     public void getCles(int cle){ //obtenir cle
@@ -14,6 +16,14 @@ public class Joueur {
             return;
         }
         this.cles[cle]++;
+    }
+
+    public void addStep(){
+        this.step++;
+    }
+
+    public int getStep() {
+        return step;
     }
 
     public void usecle(int cle){
