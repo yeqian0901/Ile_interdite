@@ -244,7 +244,7 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            if(graphe.containArt(cases[i][j])){
+                            if(graphe.containArt(cases[i][j])&&cases[i][j].getFlood()==0){
                                 ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a1.jpg");
                                 image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                                 JLabel img = new JLabel(image, JLabel.CENTER);
@@ -258,7 +258,7 @@ public class Game extends JPanel {
                                 panel1.add(img);
                             }
                         }else {
-                            if(graphe.containArt(cases[i][j])){
+                            if(graphe.containArt(cases[i][j])&&cases[i][j].getFlood()==0){
                                 ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a1.jpg");
                                 image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                                 JLabel img = new JLabel(image, JLabel.CENTER);
@@ -277,7 +277,7 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            if(graphe.containArt(cases[i][j])){
+                            if(graphe.containArt(cases[i][j])&&cases[i][j].getFlood()==0){
                                 ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a2.jpg");
                                 image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                                 JLabel img = new JLabel(image, JLabel.CENTER);
@@ -291,7 +291,7 @@ public class Game extends JPanel {
                                 panel1.add(img);
                             }
                         }else {
-                            if(graphe.containArt(cases[i][j])){
+                            if(graphe.containArt(cases[i][j])&&cases[i][j].getFlood()==0){
                                 ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a2.jpg");
                                 image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                                 JLabel img = new JLabel(image, JLabel.CENTER);
@@ -310,7 +310,7 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            if(graphe.containArt(cases[i][j])){
+                            if(graphe.containArt(cases[i][j])&&cases[i][j].getFlood()==0){
                                 ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a3.jpg");
                                 image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                                 JLabel img = new JLabel(image, JLabel.CENTER);
@@ -324,7 +324,7 @@ public class Game extends JPanel {
                                 panel1.add(img);
                             }
                         }else {
-                            if(graphe.containArt(cases[i][j])){
+                            if(graphe.containArt(cases[i][j])&&cases[i][j].getFlood()==0){
                                 ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a3.jpg");
                                 image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                                 JLabel img = new JLabel(image, JLabel.CENTER);
@@ -343,7 +343,7 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            if(graphe.containArt(cases[i][j])){
+                            if(graphe.containArt(cases[i][j])&&cases[i][j].getFlood()==0){
                                 ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a4.jpg");
                                 image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                                 JLabel img = new JLabel(image, JLabel.CENTER);
@@ -357,7 +357,7 @@ public class Game extends JPanel {
                                 panel1.add(img);
                             }
                         }else {
-                            if(graphe.containArt(cases[i][j])){
+                            if(graphe.containArt(cases[i][j])&&cases[i][j].getFlood()==0){
                                 ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a4.jpg");
                                 image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                                 JLabel img = new JLabel(image, JLabel.CENTER);
