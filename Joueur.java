@@ -58,4 +58,13 @@ public class Joueur {
     public int nbCle(int cle){
         return this.cles[cle];
     }
+
+    public boolean gagne(){
+        for(int i=0;i<4;i++){
+            if(cles[i] <= 0){
+                return false;
+            }
+        }
+        return true;
+    }
 }

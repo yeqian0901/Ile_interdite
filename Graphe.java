@@ -22,10 +22,10 @@ public class Graphe{
     }
 
     public void initial(){
-        int[] deja = new int[tx*ty];
+        int[] deja = new int[20];
         int x,y;
         int compte = 0;
-        while (compte<(tx*ty)/2) {
+        while (compte<10) {
             do {
                 x = random.nextInt(tx);
                 y = random.nextInt(ty);

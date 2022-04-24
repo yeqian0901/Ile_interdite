@@ -198,15 +198,21 @@ public class Game extends JPanel {
                 if(cases[i][j].isHelicoptere()){
                     if(cases[i][j].getJoueur() != null){
                         JButton c = new JButton(cases[i][j].getJoueur().getNom());
-                        for(int m=0;m<joueurs.length;m++){
-                            if(joueurs[m].getNom() == cases[i][j].getJoueur().getNom()){
-                                c.setForeground(JOUEUR[m]);
+                        if(cases[i][j].getJoueur().gagne()){
+                            graphe.removeJ(i,j);
+                            c.setText("gagne");
+                        }else {
+                            c = new JButton(cases[i][j].getJoueur().getNom());
+                            for (int m = 0; m < joueurs.length; m++) {
+                                if (joueurs[m].getNom() == cases[i][j].getJoueur().getNom()) {
+                                    c.setForeground(JOUEUR[m]);
+                                }
                             }
                         }
-                        JLabel img = new JLabel(HELI[cases[i][j].getFlood()], JLabel.LEFT);
-                        img.setLayout(new FlowLayout(FlowLayout.CENTER));
-                        img.add(c);
-                        panel1.add(img);
+                            JLabel img = new JLabel(HELI[cases[i][j].getFlood()], JLabel.LEFT);
+                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                            img.add(c);
+                            panel1.add(img);
                     }else {
                         JLabel img = new JLabel(HELI[cases[i][j].getFlood()], JLabel.LEFT);
                         panel1.add(img);
@@ -422,9 +428,9 @@ public class Game extends JPanel {
     }
 
     public boolean isWinning(){
-        for(int i=0;i< joueurs.length;i++){
-            for(int j=0;j<3;j++) {
-                if (joueurs[i].getCaseJ() != this.heli || joueurs[i].nbCle(j) < 4) {
+        for(int i=0;i<graphe.getTx();i++){
+            for(int j=0;j<graphe.getTy();j++){
+                if(graphe.getCases()[i][j].getJoueur() != null){
                     return false;
                 }
             }

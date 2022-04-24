@@ -5,10 +5,18 @@ Yeqian HE et Jincheng YE
 
 #Rapport Projet
 
+Objectif : creer le jeu d'Ile d'interdite
+
+ConditionGagne : tous les joueurs partissent de helicopter avec posseder tous le cles.
+
 Class:
+
 1.Case : definir chaque partie de "zone" ce qui inclure "element","coordonnee","inondation".
+
 2.Joueur : definir le player qui participe ce jeu, inclure "coordonnee","cles".
+
 3.Graphe : definir le grille de jeu et mettre les cases, inclure "l'ensemble de case","la taille de grille".
+
 4.Game : Dessiner les contenues dans Graphe, Joueur et ajouter les actions specials, inclure "Fenetre de jeu", "Boutton de chaque action".
 
 Vues :
