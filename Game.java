@@ -15,6 +15,21 @@ public class Game extends JPanel {
 
     private Color[] JOUEUR = {Color.black, Color.CYAN,Color.GREEN,Color.RED};
     private ImageIcon[] NOR = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/normal.jpg"),new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/inonde.jpg"),new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/submerge.jpg") };
+    private ImageIcon[] EAU = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/eau.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/eau2.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/submerge.jpg")};
+    private ImageIcon[] TERRE = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/terre.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/terre2.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/submerge.jpg")};
+    private ImageIcon[] FEU = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/feu.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/feu2.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/submerge.jpg")};
+    private ImageIcon[] AIR = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/air.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/air2.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/submerge.jpg")};
+    private ImageIcon[] HELI = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/heliport.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/heliport2.jpg"),
+            new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/submerge.jpg")};
     private String[] ELEMENT = new String[]{"EAU","TERRE","FEU","AIR"};
 
     public Game(Graphe g, Joueur[] joueurs){
@@ -27,9 +42,14 @@ public class Game extends JPanel {
         this.panel4 = new JPanel();
     }
 
-    public void setImage(){
+    public void setImage(){ // redefinir la taille de tous les images
         for(int i=0;i<3;i++){
             NOR[i].setImage(NOR[i].getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+            EAU[i].setImage(EAU[i].getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+            TERRE[i].setImage(TERRE[i].getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+            FEU[i].setImage(FEU[i].getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+            AIR[i].setImage(AIR[i].getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+            HELI[i].setImage(HELI[i].getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
         }
     }
 
@@ -45,8 +65,14 @@ public class Game extends JPanel {
         fin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                n++;
                 update(joueurs[n]);
+            }
+        });
+        JButton change = new JButton("change joueur");
+        change.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                n++;
                 if(n >= joueurs.length) {
                     n = n % joueurs.length;
                 }
@@ -55,6 +81,7 @@ public class Game extends JPanel {
             }
         });
         panel3.add(fin);
+        panel3.add(change);
         frame.add(panel3, BorderLayout.SOUTH);
         panel4.setLayout(new GridLayout(4,1));
         cle();
@@ -83,6 +110,7 @@ public class Game extends JPanel {
     public void updatecle(Joueur joueur){
         panel4.removeAll();
         move(joueur);
+        getCle(joueur);
         cle();
         panel4.updateUI();
         frame.add(panel4, BorderLayout.NORTH);
@@ -106,8 +134,6 @@ public class Game extends JPanel {
         for(int i=0;i<graphe.getTx();i++) {
             for (int j = 0; j < graphe.getTy(); j++) {
                 if(cases[i][j].isHelicoptere()){
-                    ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/heliport.jpg");
-                    image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                     if(cases[i][j].getJoueur() != null){
                         JButton c = new JButton(cases[i][j].getJoueur().getNom());
                         for(int m=0;m<joueurs.length;m++){
@@ -115,19 +141,18 @@ public class Game extends JPanel {
                                 c.setForeground(JOUEUR[m]);
                             }
                         }
-                        JLabel img = new JLabel(image, JLabel.LEFT);
+                        JLabel img = new JLabel(HELI[cases[i][j].getFlood()], JLabel.LEFT);
                         img.setLayout(new FlowLayout(FlowLayout.CENTER));
                         img.add(c);
                         panel1.add(img);
                     }else {
-                        JLabel img = new JLabel(new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/heliport.jpg"), JLabel.LEFT);
+                        JLabel img = new JLabel(HELI[cases[i][j].getFlood()], JLabel.LEFT);
                         panel1.add(img);
                     }
                 }else{
                     if(cases[i][j].getElement() == 0) {
                         if(cases[i][j].getJoueur() != null){
                             JButton c = new JButton(cases[i][j].getJoueur().getNom());
-                            NOR[cases[i][j].getFlood()].setImage(NOR[cases[i][j].getFlood()].getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                             for(int m=0;m<joueurs.length;m++){
                                 if(joueurs[m].getNom() == cases[i][j].getJoueur().getNom()){
                                     c.setForeground(JOUEUR[m]);
@@ -145,8 +170,6 @@ public class Game extends JPanel {
                         //c.setOpaque(true);
                         //c.setBorderPainted(false);
                     } else if (cases[i][j].getElement() == 1) {
-                        ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/eau.jpg");
-                        image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                         if(cases[i][j].getJoueur() != null){
                             JButton c = new JButton(cases[i][j].getJoueur().getNom());
                             for(int m=0;m<joueurs.length;m++){
@@ -154,20 +177,15 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            if(joueur.getNom() == cases[i][j].getJoueur().getNom()) {
-                                joueur.getCles(0);
-                            }
-                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            JLabel img = new JLabel(EAU[cases[i][j].getFlood()], JLabel.LEFT);
                             img.setLayout(new FlowLayout(FlowLayout.CENTER));
                             img.add(c);
                             panel1.add(img);
                         }else {
-                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            JLabel img = new JLabel(EAU[cases[i][j].getFlood()], JLabel.LEFT);
                             panel1.add(img);
                         }
                     } else if (cases[i][j].getElement() == 2) {
-                        ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/terre.jpg");
-                        image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                         if(cases[i][j].getJoueur() != null){
                             JButton c = new JButton(cases[i][j].getJoueur().getNom());
                             for(int m=0;m<joueurs.length;m++){
@@ -175,20 +193,15 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            if(joueur.getNom() == cases[i][j].getJoueur().getNom()) {
-                                joueur.getCles(1);
-                            }
-                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            JLabel img = new JLabel(TERRE[cases[i][j].getFlood()], JLabel.LEFT);
                             img.setLayout(new FlowLayout(FlowLayout.CENTER));
                             img.add(c);
                             panel1.add(img);
                         }else {
-                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            JLabel img = new JLabel(TERRE[cases[i][j].getFlood()], JLabel.LEFT);
                             panel1.add(img);
                         }
                     } else if (cases[i][j].getElement() == 3) {
-                        ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/feu.jpg");
-                        image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                         if(cases[i][j].getJoueur() != null){
                             JButton c = new JButton(cases[i][j].getJoueur().getNom());
                             for(int m=0;m<joueurs.length;m++){
@@ -196,20 +209,15 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            if(joueur.getNom() == cases[i][j].getJoueur().getNom()) {
-                                joueur.getCles(2);
-                            }
-                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            JLabel img = new JLabel(FEU[cases[i][j].getFlood()], JLabel.LEFT);
                             img.setLayout(new FlowLayout(FlowLayout.CENTER));
                             img.add(c);
                             panel1.add(img);
                         }else {
-                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            JLabel img = new JLabel(FEU[cases[i][j].getFlood()], JLabel.LEFT);
                             panel1.add(img);
                         }
                     } else if (cases[i][j].getElement() == 4) {
-                        ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/air.jpg");
-                        image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
                         if(cases[i][j].getJoueur() != null){
                             JButton c = new JButton(cases[i][j].getJoueur().getNom());
                             for(int m=0;m<joueurs.length;m++){
@@ -217,17 +225,33 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            if(joueur.getNom() == cases[i][j].getJoueur().getNom()) {
-                                joueur.getCles(3);
-                            }
-                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            JLabel img = new JLabel(AIR[cases[i][j].getFlood()], JLabel.LEFT);
                             img.setLayout(new FlowLayout(FlowLayout.CENTER));
                             img.add(c);
                             panel1.add(img);
                         }else {
-                            JLabel img = new JLabel(image, JLabel.LEFT);
+                            JLabel img = new JLabel(AIR[cases[i][j].getFlood()], JLabel.LEFT);
                             panel1.add(img);
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    public void getCle(Joueur joueur){
+        Case[][] cases = graphe.getCases();
+        for(int i=0;i<graphe.getTx();i++) {
+            for (int j = 0; j < graphe.getTy(); j++) {
+                if (cases[i][j].getJoueur() != null) {
+                    if (joueur.getNom() == cases[i][j].getJoueur().getNom() && cases[i][j].getElement() == 1) {
+                        joueur.getCles(0);
+                    } else if (joueur.getNom() == cases[i][j].getJoueur().getNom() && cases[i][j].getElement() == 2) {
+                        joueur.getCles(1);
+                    } else if (joueur.getNom() == cases[i][j].getJoueur().getNom() && cases[i][j].getElement() == 3) {
+                        joueur.getCles(2);
+                    } else if (joueur.getNom() == cases[i][j].getJoueur().getNom() && cases[i][j].getElement() == 4) {
+                        joueur.getCles(3);
                     }
                 }
             }

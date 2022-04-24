@@ -71,8 +71,10 @@ public class Graphe{
         int compte = 0;
         int x,y;
         while(compte < 4){
-            x = random.nextInt(tx);
-            y = random.nextInt(ty);
+            do{
+                x = random.nextInt(tx);
+                y = random.nextInt(ty);
+            }while(cases[x][y].getFlood() >=2);
             cases[x][y].addflood();
             compte++;
         }
@@ -116,7 +118,7 @@ public class Graphe{
             do {
                 x = random.nextInt(tx);
                 y = random.nextInt(ty);
-            } while (contains(x, y, deja));
+            } while (contains(x, y, deja) || cases[x][y].getElement() != 0);
 
             Case c = getCase(x,y);
             j[compte] = new Joueur("nom"+compte, c);
