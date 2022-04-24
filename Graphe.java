@@ -4,14 +4,13 @@ public class Graphe{
     private int tx,ty;
     private Case[][] cases;// Tableau contenant les cases
     private Random random = new Random();
-    private Joueur[] joueurs;
+
 
     // Constructeur
     public Graphe(int tx,int ty) {
         this.tx = tx;
         this.ty = ty;
         cases = new Case[tx][ty];
-        this.joueurs = new Joueur[6];
             for(int i=0;i<tx;i++){
                 for(int j=0;j<ty;j++){
                     Case c = new Case(this,false,i,j,0);
