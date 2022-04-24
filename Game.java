@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Game extends JPanel {
     private Graphe graphe;
@@ -80,7 +79,7 @@ public class Game extends JPanel {
         }
     }
 
-    public void start(){
+    public void start(){ //Game start
         setImage();
         panel1.setLayout(new GridLayout(graphe.getTx(),graphe.getTy()));
         draw();
@@ -120,7 +119,7 @@ public class Game extends JPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void update(){
+    public void update(){ //apres "fin de tour" niveau de inondation augemente
             panel1.removeAll();
             graphe.floodAdd();
             draw();
@@ -128,14 +127,14 @@ public class Game extends JPanel {
             frame.add(panel1);
     }
 
-    public void updateJ(){
+    public void updateJ(){ //update le coordonnee de Joueur
         panel2.removeAll();
         direction(joueurs[n]);
         panel2.updateUI();
         frame.add(panel2, BorderLayout.EAST);
     }
 
-    public void updateCle(Joueur joueur){
+    public void updateCle(Joueur joueur){ //update les cles de joueur possede
         panel4.removeAll();
         move(joueur);
         getCle(joueur);
@@ -144,7 +143,7 @@ public class Game extends JPanel {
         frame.add(panel4, BorderLayout.NORTH);
     }
 
-    public void cle(){
+    public void cle(){ //affiche les cles de chaque joueur
         label1 = new JLabel(joueurs[0].getNom() + " : " + ELEMENT[0] + " -> " + joueurs[0].nbCle(0) + "; " + ELEMENT[1] + " -> "+ joueurs[0].nbCle(1) + "; " + ELEMENT[2] + " -> "+ joueurs[0].nbCle(2) + "; " + ELEMENT[3] + " -> "+ joueurs[0].nbCle(3));
         label1.setForeground(JOUEUR[0]);
         if(joueurs.length>1) {
@@ -175,7 +174,7 @@ public class Game extends JPanel {
         panel4.add(label6);
     }
 
-    public void draw(){
+    public void draw(){ //dessiner grille principal
         if(isFail()){
             panel1.setLayout(new GridLayout(1,1));
             ImageIcon fini = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/defaite.jpg");
@@ -307,7 +306,7 @@ public class Game extends JPanel {
         }
     }
 
-    public void getCle(Joueur joueur){
+    public void getCle(Joueur joueur){ //Dans le zone special, obtenir le cle d'element
         Case[][] cases = graphe.getCases();
         for(int i=0;i<graphe.getTx();i++) {
             for (int j = 0; j < graphe.getTy(); j++) {
@@ -326,7 +325,7 @@ public class Game extends JPanel {
         }
     }
 
-    public void direction(Joueur j){
+    public void direction(Joueur j){ // le mouvement de joueur et les actions special
         label = new JLabel(j.getNom() + " move step : "+ click + "/3");
         JButton up = new JButton("up");
         up.setForeground(Color.PINK);
@@ -420,14 +419,14 @@ public class Game extends JPanel {
         panel2.add(label);
     }
 
-    public void move(Joueur joueur){
+    public void move(Joueur joueur){ //update apres mouvement
         panel1.removeAll();
         draw();
         panel1.updateUI();
         frame.add(panel1);
     }
 
-    public boolean isWinning(){
+    public boolean isWinning(){ //condition gagne
         for(int i=0;i<graphe.getTx();i++){
             for(int j=0;j<graphe.getTy();j++){
                 if(graphe.getCases()[i][j].getJoueur() != null){
@@ -438,7 +437,7 @@ public class Game extends JPanel {
         return true;
     }
 
-    public boolean isFail(){
+    public boolean isFail(){ //condition perdre
         if(heli.getFlood() >= 2){
             return true;
         }

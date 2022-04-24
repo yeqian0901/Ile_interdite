@@ -104,7 +104,7 @@ public class Graphe{
         }
     }
 
-    public Joueur[] creeJoueurs(int n){
+    public Joueur[] creeJoueurs(int n){ //creer un ensemble de joueur participate
         Joueur[] j= new Joueur[n];
         if(n>6){
             return j;

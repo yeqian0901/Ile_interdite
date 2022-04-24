@@ -37,8 +37,9 @@ Vues :
 13. Les critères caractérisant les parties perdues et arrêter la partie lorsqu’ils se réalisent. (class Game -> isFail())
 
 Difficultés :
-1.	Penser l’ordre de programmation des différents éléments.
-2.	Visualisation des cartes et des joueurs.
-3.	Deplacer les joueurs partager.
-4.	Renouveler l’image chaque tour.
-5.	File de images est toujours incorrect.
+1. Penser l’ordre de programmation des différents éléments.
+2. Visualisation des cartes et des joueurs.
+3. Deplacer les joueurs partager.
+4. Renouveler l’image chaque tour.
+5. File de images est toujours incorrect.
+6. les boutons pas Bordor est toujours couvri par bouton suivant.
