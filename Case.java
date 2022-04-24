@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class Case extends ZoneCliquable {
+public class Case{
     private int x,y;
     private int flood;//0 normal, et apres niveau 1 inonder, et enfin 2 submerger
     private boolean helicoptere;
@@ -8,7 +8,6 @@ public class Case extends ZoneCliquable {
     private Joueur joueur;
 
     public Case(boolean heli, int x, int y, int element){
-        super("NORMAL", 100,100);
         this.x=x;
         this.y=y;
         this.element = element;
@@ -48,12 +47,10 @@ public class Case extends ZoneCliquable {
         this.element = element;
     }
 
-    @Override
     public int getX() {
         return x;
     }
 
-    @Override
     public int getY() {
         return y;
     }
@@ -81,7 +78,4 @@ public class Case extends ZoneCliquable {
     public void removeJoueur(){
         this.joueur =null;
     }
-
-    public void clicGauche(){}
-    public void clicDroit(){}
 }
