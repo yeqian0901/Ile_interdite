@@ -33,7 +33,6 @@ public class Graphe{
 
             if(compte == 0){
                 cases[x][y].addHelicop();
-                artefact[compte] = cases[x][y];
             }else{
                 cases[x][y].setElement(compte % 5);
                 artefact[compte] = cases[x][y];
@@ -135,5 +134,14 @@ public class Graphe{
 
     public Case[] getArtefact(){
         return this.artefact;
+    }
+
+    public boolean containArt(Case c){
+        for(int i=0;i<5;i++){
+            if(artefact[i] == c){
+                return true;
+            }
+        }
+        return false;
     }
 }

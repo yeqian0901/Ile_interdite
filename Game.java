@@ -244,13 +244,30 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            JLabel img = new JLabel(EAU[cases[i][j].getFlood()], JLabel.LEFT);
-                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
-                            img.add(c);
-                            panel1.add(img);
+                            if(graphe.containArt(cases[i][j])){
+                                ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a1.jpg");
+                                image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+                                JLabel img = new JLabel(image, JLabel.CENTER);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                img.add(c);
+                                panel1.add(img);
+                            }else {
+                                JLabel img = new JLabel(EAU[cases[i][j].getFlood()], JLabel.LEFT);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                img.add(c);
+                                panel1.add(img);
+                            }
                         }else {
-                            JLabel img = new JLabel(EAU[cases[i][j].getFlood()], JLabel.LEFT);
-                            panel1.add(img);
+                            if(graphe.containArt(cases[i][j])){
+                                ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a1.jpg");
+                                image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+                                JLabel img = new JLabel(image, JLabel.CENTER);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                panel1.add(img);
+                            }else {
+                                JLabel img = new JLabel(EAU[cases[i][j].getFlood()], JLabel.LEFT);
+                                panel1.add(img);
+                            }
                         }
                     } else if (cases[i][j].getElement() == 2) {
                         if(cases[i][j].getJoueur() != null){
@@ -260,13 +277,30 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            JLabel img = new JLabel(TERRE[cases[i][j].getFlood()], JLabel.LEFT);
-                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
-                            img.add(c);
-                            panel1.add(img);
+                            if(graphe.containArt(cases[i][j])){
+                                ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a2.jpg");
+                                image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+                                JLabel img = new JLabel(image, JLabel.CENTER);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                img.add(c);
+                                panel1.add(img);
+                            }else {
+                                JLabel img = new JLabel(TERRE[cases[i][j].getFlood()], JLabel.LEFT);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                img.add(c);
+                                panel1.add(img);
+                            }
                         }else {
-                            JLabel img = new JLabel(TERRE[cases[i][j].getFlood()], JLabel.LEFT);
-                            panel1.add(img);
+                            if(graphe.containArt(cases[i][j])){
+                                ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a2.jpg");
+                                image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+                                JLabel img = new JLabel(image, JLabel.CENTER);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                panel1.add(img);
+                            }else {
+                                JLabel img = new JLabel(TERRE[cases[i][j].getFlood()], JLabel.LEFT);
+                                panel1.add(img);
+                            }
                         }
                     } else if (cases[i][j].getElement() == 3) {
                         if(cases[i][j].getJoueur() != null){
@@ -276,13 +310,30 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            JLabel img = new JLabel(FEU[cases[i][j].getFlood()], JLabel.LEFT);
-                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
-                            img.add(c);
-                            panel1.add(img);
+                            if(graphe.containArt(cases[i][j])){
+                                ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a3.jpg");
+                                image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+                                JLabel img = new JLabel(image, JLabel.CENTER);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                img.add(c);
+                                panel1.add(img);
+                            }else {
+                                JLabel img = new JLabel(FEU[cases[i][j].getFlood()], JLabel.LEFT);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                img.add(c);
+                                panel1.add(img);
+                            }
                         }else {
-                            JLabel img = new JLabel(FEU[cases[i][j].getFlood()], JLabel.LEFT);
-                            panel1.add(img);
+                            if(graphe.containArt(cases[i][j])){
+                                ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a3.jpg");
+                                image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+                                JLabel img = new JLabel(image, JLabel.CENTER);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                panel1.add(img);
+                            }else {
+                                JLabel img = new JLabel(FEU[cases[i][j].getFlood()], JLabel.LEFT);
+                                panel1.add(img);
+                            }
                         }
                     } else if (cases[i][j].getElement() == 4) {
                         if(cases[i][j].getJoueur() != null){
@@ -292,13 +343,30 @@ public class Game extends JPanel {
                                     c.setForeground(JOUEUR[m]);
                                 }
                             }
-                            JLabel img = new JLabel(AIR[cases[i][j].getFlood()], JLabel.LEFT);
-                            img.setLayout(new FlowLayout(FlowLayout.CENTER));
-                            img.add(c);
-                            panel1.add(img);
+                            if(graphe.containArt(cases[i][j])){
+                                ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a4.jpg");
+                                image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+                                JLabel img = new JLabel(image, JLabel.CENTER);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                img.add(c);
+                                panel1.add(img);
+                            }else {
+                                JLabel img = new JLabel(AIR[cases[i][j].getFlood()], JLabel.LEFT);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                img.add(c);
+                                panel1.add(img);
+                            }
                         }else {
-                            JLabel img = new JLabel(AIR[cases[i][j].getFlood()], JLabel.LEFT);
-                            panel1.add(img);
+                            if(graphe.containArt(cases[i][j])){
+                                ImageIcon image = new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/a4.jpg");
+                                image.setImage(image.getImage().getScaledInstance(120,120,Image.SCALE_DEFAULT));
+                                JLabel img = new JLabel(image, JLabel.CENTER);
+                                img.setLayout(new FlowLayout(FlowLayout.CENTER));
+                                panel1.add(img);
+                            }else {
+                                JLabel img = new JLabel(AIR[cases[i][j].getFlood()], JLabel.LEFT);
+                                panel1.add(img);
+                            }
                         }
                     }
                 }
