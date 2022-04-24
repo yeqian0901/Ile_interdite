@@ -59,13 +59,27 @@ public class Case extends ZoneCliquable {
     }
 
     public void addJoueur(Joueur j){
-        if(j.getCaseJ().getX() == this.x && j.getCaseJ().getY() == this.y) {
             this.joueur = j;
-        }
     }
 
     public int getFlood() {
         return flood;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public Joueur getJoueur(){
+        return joueur;
+    }
+
+    public void removeJoueur(){
+        this.joueur =null;
     }
 
     public void clicGauche(){}

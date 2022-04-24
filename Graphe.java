@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Graphe extends Grille{
+public class Graphe{
     private int tx,ty;
     private Case[][] cases;// Tableau contenant les cases
     private Random random = new Random();
@@ -8,7 +8,6 @@ public class Graphe extends Grille{
 
     // Constructeur
     public Graphe(int tx,int ty) {
-        super(tx,ty);
         this.tx = tx;
         this.ty = ty;
         cases = new Case[tx][ty];
@@ -79,4 +78,17 @@ public class Graphe extends Grille{
         }
     }
 
+    public void ajouteJ(int x, int y, Joueur j) {
+        if(x<0 || x>=tx || y<0 || y>=ty){
+            return;
+        }
+        cases[x][y].addJoueur(j);
+    }
+
+    public void removeJ(int x, int y){
+        if(x<0 || x>=tx || y<0 || y>=ty){
+            return;
+        }
+        cases[x][y].removeJoueur();
+    }
 }

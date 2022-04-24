@@ -1,9 +1,11 @@
 public class Joueur {
+    private Game game;
     private String nom;
     private Case caseJ;
     private int[] cles;//0 est eau, 1 est terre, 2 est feu, 3 est air
 
-    public Joueur(String nom, Case c){
+    public Joueur(Game game,String nom, Case c){
+        this.game = game;
         this.nom = nom;
         this.caseJ = c;
         this.cles = new int[]{0,0,0,0};
@@ -23,8 +25,9 @@ public class Joueur {
         this.cles[cle]--;
     }
 
-    public void setCaseJ(Case c){
-        this.caseJ = c;
+    public void setCaseJ(int x, int y){
+        this.caseJ.setX(x);
+        this.caseJ.setY(y);
     }
 
     public Case getCaseJ() {
