@@ -96,7 +96,18 @@ public class Graphe{
         return cases[x][y];
     }
 
-    public Joueur[] creeJoueurs(int n){
+    public boolean existJ(int x, int y){
+        if(cases[x][y].getJoueur() == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public Joueur[] creeJoueurs(int n) throws Exception{
+        if(n>6){
+            throw new Exception("too many joueur");
+        }
         Joueur[] j= new Joueur[n];
         int[] deja = new int[20];
         int compte=0;

@@ -9,8 +9,8 @@ public class Joueur {
         this.cles = new int[]{0,0,0,0};
     }
 
-    public void getCles(int cle){
-        if(cle < 0 || cle >3){
+    public void getCles(int cle){ //obtenir cle
+        if(cle < 0 || cle > 3){
             return;
         }
         this.cles[cle]++;
@@ -34,5 +34,20 @@ public class Joueur {
 
     public String getNom(){
         return nom;
+    }
+
+    public boolean haveCle(int n){
+        if(cles[n]>0){
+            return true;
+        }
+        return false;
+    }
+
+    public int[] getCle() {
+        return cles;
+    }
+
+    public int nbCle(int cle){
+        return this.cles[cle];
     }
 }

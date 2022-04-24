@@ -24,7 +24,7 @@ public class Main {
         return j;
         }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
        Graphe g = new Graphe(4,5);
        Game game = new Game(g, g.creeJoueurs(4));
        game.start();
