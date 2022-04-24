@@ -1,13 +1,16 @@
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Case{
+    private Graphe graphe;
     private int x,y;
     private int flood;//0 normal, et apres niveau 1 inonder, et enfin 2 submerger
     private boolean helicoptere;
     private int element;//0 est rien, 1 est eau, 2 est terre, 3 est feu, 4 est air
     private Joueur joueur;
 
-    public Case(boolean heli, int x, int y, int element){
+    public Case(Graphe graphe,boolean heli, int x, int y, int element){
+        this.graphe = graphe;
         this.x=x;
         this.y=y;
         this.element = element;
@@ -77,5 +80,22 @@ public class Case{
 
     public void removeJoueur(){
         this.joueur =null;
+    }
+
+    public ArrayList<Case> voisin(){
+        ArrayList<Case> v = new ArrayList<>();
+        if(x-1>=0){
+            v.add(graphe.getCase(x-1,y));
+        }
+        if(x+1<graphe.getTx()){
+            v.add(graphe.getCase(x+1,y));
+        }
+        if(y-1>=0){
+            v.add(graphe.getCase(x,y-1));
+        }
+        if(y+1<graphe.getTy()){
+            v.add(graphe.getCase(x,y+1));
+        }
+        return v;
     }
 }

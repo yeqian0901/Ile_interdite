@@ -14,7 +14,7 @@ public class Graphe{
         this.joueurs = new Joueur[6];
             for(int i=0;i<tx;i++){
                 for(int j=0;j<ty;j++){
-                    Case c = new Case(false,i,j,0);
+                    Case c = new Case(this,false,i,j,0);
                     cases[i][j] = c;
                 }
             }
@@ -121,7 +121,7 @@ public class Graphe{
             } while (contains(x, y, deja) || cases[x][y].getElement() != 0);
 
             Case c = getCase(x,y);
-            j[compte] = new Joueur("nom"+compte, c);
+            j[compte] = new Joueur(this,"nom"+compte, c);
             c.addJoueur(j[compte]);
 
             deja[compte*2] = x;
@@ -129,5 +129,9 @@ public class Graphe{
             compte++;
         }
         return j;
+    }
+
+    public void reduceFlood(int x,int y){
+        cases[x][y].reduceflood();
     }
 }

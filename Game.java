@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Game extends JPanel {
     private Graphe graphe;
@@ -23,7 +25,7 @@ public class Game extends JPanel {
     private Case heli;
     private int click=0;
 
-    private Color[] JOUEUR = {Color.black, Color.CYAN,Color.GREEN,Color.RED,Color.ORANGE,Color.yellow};
+    private Color[] JOUEUR = {Color.black, Color.CYAN,Color.GREEN,Color.RED,Color.ORANGE,Color.BLUE};
     private ImageIcon[] NOR = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/normal.jpg"),new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/inonde.jpg"),new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/submerge.jpg") };
     private ImageIcon[] EAU = {new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/eau.jpg"),
             new ImageIcon("/Users/apple/IdeaProjects/Ile_interdite/Icon/eau2.jpg"),
@@ -113,7 +115,7 @@ public class Game extends JPanel {
         cle();
         frame.add(panel4, BorderLayout.NORTH);
         frame.pack();
-        frame.setBounds(100,100,800,600);
+        frame.setBounds(100,100,1000,800);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -319,7 +321,7 @@ public class Game extends JPanel {
     }
 
     public void direction(Joueur j){
-        label = new JLabel("move step : "+ click + "/3");
+        label = new JLabel(j.getNom() + " move step : "+ click + "/3");
         JButton up = new JButton("up");
         up.setForeground(Color.PINK);
         up.addActionListener(new ActionListener() {
@@ -333,7 +335,7 @@ public class Game extends JPanel {
                     j.setCaseJ(x-1, y);
                     updateCle(j);
                     click++;
-                    label.setText("move step : "+ click + "/3");
+                    label.setText(j.getNom() +" move step : "+ click + "/3");
                 }
             }
         });
@@ -351,7 +353,7 @@ public class Game extends JPanel {
                     j.setCaseJ(x, y+1);
                     updateCle(j);
                     click++;
-                    label.setText("move step : "+ click + "/3");
+                    label.setText(j.getNom() +" move step : "+ click + "/3");
                 }
             }
         });
@@ -369,7 +371,7 @@ public class Game extends JPanel {
                     j.setCaseJ(x, y-1);
                     updateCle(j);
                     click++;
-                    label.setText("move step : "+ click + "/3");
+                    label.setText(j.getNom() +" move step : "+ click + "/3");
                 }
             }
         });
@@ -387,11 +389,28 @@ public class Game extends JPanel {
                     j.setCaseJ(x+1, y);
                     updateCle(j);
                     click++;
-                    label.setText("move step : "+ click + "/3");
+                    label.setText(j.getNom() +" move step : "+ click + "/3");
                 }
             }
         });
         panel2.add(down);
+        JButton assecher = new JButton("assecher");
+        assecher.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Case> c = joueurs[n].voisin();
+                for(Case x: c) {
+                    if(x.getFlood() == 1) {
+                        graphe.reduceFlood(x.getX(), x.getY());
+                        move(joueurs[n]);
+                        click++;
+                        label.setText(j.getNom() +" move step : "+ click + "/3");
+                        break;
+                    }
+                }
+            }
+        });
+        panel2.add(assecher);
         panel2.add(label);
     }
 
