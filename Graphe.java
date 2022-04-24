@@ -106,11 +106,11 @@ public class Graphe{
         }
     }
 
-    public Joueur[] creeJoueurs(int n) throws Exception{
-        if(n>6){
-            throw new Exception("too many joueur");
-        }
+    public Joueur[] creeJoueurs(int n){
         Joueur[] j= new Joueur[n];
+        if(n>6){
+            return j;
+        }
         int[] deja = new int[20];
         int compte=0;
         int x,y;
