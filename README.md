@@ -3,6 +3,8 @@ Yeqian HE et Jincheng YE
 
 (notice: Les routes de dossier pour les images sont peut-etre differents dans les differents ordinateurs. Merci pour votre comprehension!)
 
+guide de l'utilisateur：Copier le lien dans IntelliJ IDEA，
+
 #Rapport Projet
 
 Objectif : creer le jeu d'Ile d'interdite
